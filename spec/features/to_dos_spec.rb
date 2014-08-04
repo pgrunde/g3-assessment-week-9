@@ -40,8 +40,9 @@ feature "ToDos" do
 
     fill_in "todo", with: "Get lice removing shampoo"
 
-    click_button "Update"
+    click_button "Update ToDo"
 
     expect(page).to have_content "Get lice removing shampoo"
+    expect(page).to have_content "ToDo updated"
   end
 end

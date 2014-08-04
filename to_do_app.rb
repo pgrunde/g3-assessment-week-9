@@ -45,6 +45,7 @@ class ToDoApp < Sinatra::Application
     update = ToDoItem.find(params[:id])
     update.body = todo
     update.save
+    flash[:notice] = "ToDo updated"
     redirect "/"
   end
 
