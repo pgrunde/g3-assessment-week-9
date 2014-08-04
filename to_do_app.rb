@@ -30,6 +30,24 @@ class ToDoApp < Sinatra::Application
     erb :register, locals: {user: User.new}
   end
 
+  get "/edit/:id" do
+    if current_user
+      user = current_user
+      todo = ToDoItem.find(params[:id])
+      erb :edit_todo, locals: {todo: todo, user: user}
+    else
+      erb :signed_out
+    end
+  end
+
+  patch "/edit/:id" do
+    todo = params[:todo]
+    update = ToDoItem.find(params[:id])
+    update.body = todo
+    update.save
+    redirect "/"
+  end
+
   post "/registrations" do
     user = User.new(username: params[:username], password: params[:password])
 
